@@ -61,14 +61,14 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Email is not registered' });
     }
     
     // Check password
     const isMatch = await user.comparePassword(password);
     
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Incorrect email or password' });
     }
     
     // Update last login
